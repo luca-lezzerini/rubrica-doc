@@ -15,7 +15,10 @@ export class AppComponent {
   contatti: Contatto[] = [];
   url = "http://localhost:8080/";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // carica i dati della rubrica all'avvio
+    this.aggiorna();
+  }
 
   aggiungi() {
     // metto il contatto da inserire nel DTO
@@ -29,11 +32,29 @@ export class AppComponent {
     ox.subscribe(r => {
       this.contatti = r.listaContatti;
     });
+    // resetto l'oggetto associato al campo di input
+    this.contatto = new Contatto();
   }
 
-  aggiorna() { }
+  aggiorna() {
+    // preparo la richiesta GET verso il server
+    let ox: Observable<RispostaDaServerDto> = this.http
+      .get<RispostaDaServerDto>(this.url + "leggi-rubrica");
+    // invio la richiesta, avendole dato la callback
+    ox.subscribe(r => {
+      this.contatti = r.listaContatti;
+    });
+  }
 
-  svuota() { }
+  svuota() {
+    // preparo la richiesta GET verso il server
+    let ox: Observable<RispostaDaServerDto> = this.http
+      .get<RispostaDaServerDto>(this.url + "svuota");
+    // invio la richiesta, avendole dato la callback
+    ox.subscribe(r => {
+      this.contatti = r.listaContatti;
+    });
+   }
 
   cancella(inx: number) { }
 }
