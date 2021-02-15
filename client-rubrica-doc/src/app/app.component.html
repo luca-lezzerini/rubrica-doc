@@ -6,13 +6,13 @@ Telefono <input type="text" [(ngModel)]="contatto.telefono">
 <button (click)="aggiorna()">Aggiorna</button>
 <button (click)="svuota()">Svuota Rubrica</button>
 <table>
-  <tr *ngFor="let c of contatti; index as i">
-    <td>{{c.id}}</td>
-    <td>{{c.nome}}</td>
-    <td>{{c.cognome}}</td>
-    <td>{{c.telefono}}</td>
+  <tr *ngFor="let persona of contatti">
+    <td>{{persona.id}}</td>
+    <td>{{persona.nome}}</td>
+    <td>{{persona.cognome}}</td>
+    <td>{{persona.telefono}}</td>
     <td>
-      <button (click)="cancella(i)">X</button>
+      <button (click)="cancella(persona)">X</button>
     </td>
   </tr>
 </table>

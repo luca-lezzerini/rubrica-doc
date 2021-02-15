@@ -56,5 +56,17 @@ export class AppComponent {
     });
    }
 
-  cancella(inx: number) { }
+  cancella(c: Contatto) {
+    // metto il contatto da cancellare nel DTO
+    let req = new RichiestaAServerDto();
+    req.contatto = c;
+
+    // preparo la richiesta POST verso il server
+    let ox: Observable<RispostaDaServerDto> = this.http
+      .post<RispostaDaServerDto>(this.url + "cancella", req);
+    // invio la richiesta, avendole dato la callback
+    ox.subscribe(r => {
+      this.contatti = r.listaContatti;
+    });
+   }
 }
