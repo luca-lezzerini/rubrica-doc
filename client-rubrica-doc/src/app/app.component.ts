@@ -14,6 +14,7 @@ export class AppComponent {
   contatto = new Contatto();
   contatti: Contatto[] = [];
   url = "http://localhost:8080/";
+  criterioRicerca = "";
 
   constructor(private http: HttpClient) {
     // carica i dati della rubrica all'avvio
@@ -54,7 +55,7 @@ export class AppComponent {
     ox.subscribe(r => {
       this.contatti = r.listaContatti;
     });
-   }
+  }
 
   cancella(c: Contatto) {
     // metto il contatto da cancellare nel DTO
@@ -68,5 +69,21 @@ export class AppComponent {
     ox.subscribe(r => {
       this.contatti = r.listaContatti;
     });
-   }
+  }
+
+  cerca() {
+    // metto il contatto da cancellare nel DTO
+    let req = new RichiestaAServerDto();
+    req.contatto = new Contatto();
+    req.contatto.nome = this.criterioRicerca;
+
+    // preparo la richiesta POST verso il server
+    let ox: Observable<RispostaDaServerDto> = this.http
+      .post<RispostaDaServerDto>(this.url + "cerca-nome", req);
+    // invio la richiesta, avendole dato la callback
+    ox.subscribe(r => {
+      this.contatti = r.listaContatti;
+    });
+  }
 }
+

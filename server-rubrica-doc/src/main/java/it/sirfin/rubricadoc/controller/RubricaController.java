@@ -49,4 +49,15 @@ public class RubricaController {
     public ListaContattiDto svuotaRubrica() {
         return new ListaContattiDto(rubricaService.svuotaRubrica());
     }
+
+    @RequestMapping("/cerca-nome")
+    @ResponseBody
+    public ListaContattiDto cercaNome(@RequestBody RichiestaContattoDto dto) {
+        Contatto c = dto.getContatto();
+        String nomeLike = "%" + c.getNome() + "%";
+        List<Contatto> lista = rubricaService.cercaNome(nomeLike);
+        ListaContattiDto risp = new ListaContattiDto(lista);
+        return risp;
+    }
+
 }

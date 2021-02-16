@@ -5,6 +5,10 @@ Telefono <input type="text" [(ngModel)]="contatto.telefono">
 <button (click)="aggiungi()">Aggiungi</button>
 <button (click)="aggiorna()">Aggiorna</button>
 <button (click)="svuota()">Svuota Rubrica</button>
+<hr>
+Testo da cercare <input type="text" [(ngModel)]="criterioRicerca">
+<button (click)="cerca()">Cerca</button>
+<hr>
 <table>
   <tr *ngFor="let persona of contatti">
     <td>{{persona.id}}</td>

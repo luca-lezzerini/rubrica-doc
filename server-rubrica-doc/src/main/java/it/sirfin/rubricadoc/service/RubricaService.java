@@ -12,4 +12,6 @@ public interface RubricaService {
     List<Contatto> cancellaContatto(Contatto c);
     
     List<Contatto> svuotaRubrica();
+    
+    List<Contatto> cercaNome(String nome);
 }

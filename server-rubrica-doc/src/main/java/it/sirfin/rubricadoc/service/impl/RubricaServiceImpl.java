@@ -41,4 +41,11 @@ public class RubricaServiceImpl implements RubricaService{
 //        return leggiRubricaCompleta();
     }
 
+    @Override
+    public List<Contatto> cercaNome(String nome) {
+        return contattoRepository.findByNomeLikeOrderByNomeDesc(nome);
+    }
+    
+    
+
 }
