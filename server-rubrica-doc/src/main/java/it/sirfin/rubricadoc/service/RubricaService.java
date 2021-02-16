@@ -14,4 +14,6 @@ public interface RubricaService {
     List<Contatto> svuotaRubrica();
     
     List<Contatto> cercaNome(String nome);
+    
+    void testQuery();
 }

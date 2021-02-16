@@ -60,4 +60,10 @@ public class RubricaController {
         return risp;
     }
 
+    @RequestMapping("/test-query")
+    @ResponseBody
+    public void cercaNome() {
+        rubricaService.testQuery();
+    }
+
 }

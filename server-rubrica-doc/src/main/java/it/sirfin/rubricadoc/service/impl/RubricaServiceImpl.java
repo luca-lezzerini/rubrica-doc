@@ -45,6 +45,24 @@ public class RubricaServiceImpl implements RubricaService{
     public List<Contatto> cercaNome(String nome) {
         return contattoRepository.findByNomeLikeOrderByNomeDesc(nome);
     }
+
+    @Override
+    public void testQuery() {
+        List<Contatto> l1 = contattoRepository.findByNomeAndCognome("Mario", "Rossi");
+        for (Contatto contatto : l1) {
+            System.out.println(contatto);
+        }
+        List<Contatto> l2 = contattoRepository.findByNomeOrCognome("Mario", "Rossi");
+        l2.forEach(t-> System.out.println(t));
+        List<Contatto> l3 = contattoRepository.findByNomeIsNotNullAndCognome("Rossi");
+        l3.stream().forEach(t-> System.out.println(t));
+        List<Contatto> l4 = contattoRepository.findByNomeIsNullAndCognomeIsNotNull();
+        l4.stream().forEach(t-> System.out.println(t));
+        List<Contatto> l5 = contattoRepository.findByTelefonoIsNullOrderByNomeAsc();
+        l5.stream().forEach(t-> System.out.println(t));
+        List<Contatto> l6 = contattoRepository.findByOrderByNomeAscCognomeDesc();
+        l6.stream().forEach(t-> System.out.println(t));
+    }
     
     
 
