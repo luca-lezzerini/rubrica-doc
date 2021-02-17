@@ -1,6 +1,7 @@
 package it.sirfin.rubricadoc.controller;
 
 import it.sirfin.rubricadoc.dto.ListaContattiDto;
+import it.sirfin.rubricadoc.dto.RicercaDto;
 import it.sirfin.rubricadoc.dto.RichiestaContattoDto;
 import it.sirfin.rubricadoc.model.Contatto;
 import it.sirfin.rubricadoc.service.RubricaService;
@@ -52,9 +53,8 @@ public class RubricaController {
 
     @RequestMapping("/cerca-nome")
     @ResponseBody
-    public ListaContattiDto cercaNome(@RequestBody RichiestaContattoDto dto) {
-        Contatto c = dto.getContatto();
-        String nomeLike = "%" + c.getNome() + "%";
+    public ListaContattiDto cercaNome(@RequestBody RicercaDto dto) {
+        String nomeLike = "%" + dto.getStringaDaCercare() + "%";
         List<Contatto> lista = rubricaService.cercaNome(nomeLike);
         ListaContattiDto risp = new ListaContattiDto(lista);
         return risp;

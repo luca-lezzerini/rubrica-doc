@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RubricaServiceImpl implements RubricaService{
+public class RubricaServiceImpl implements RubricaService {
 
     @Autowired
     ContattoRepository contattoRepository;
-    
+
     @Override
     public List<Contatto> leggiRubricaCompleta() {
         return contattoRepository.findAll();
@@ -42,8 +42,11 @@ public class RubricaServiceImpl implements RubricaService{
     }
 
     @Override
-    public List<Contatto> cercaNome(String nome) {
-        return contattoRepository.findByNomeLikeOrderByNomeDesc(nome);
+    public List<Contatto> cercaNome(String stringaDaCercare) {
+        return contattoRepository.findByNomeLikeOrCognomeLikeOrTelefonoLike(
+                stringaDaCercare,
+                stringaDaCercare,
+                stringaDaCercare);
     }
 
     @Override
@@ -53,17 +56,15 @@ public class RubricaServiceImpl implements RubricaService{
             System.out.println(contatto);
         }
         List<Contatto> l2 = contattoRepository.findByNomeOrCognome("Mario", "Rossi");
-        l2.forEach(t-> System.out.println(t));
+        l2.forEach(t -> System.out.println(t));
         List<Contatto> l3 = contattoRepository.findByNomeIsNotNullAndCognome("Rossi");
-        l3.stream().forEach(t-> System.out.println(t));
+        l3.stream().forEach(t -> System.out.println(t));
         List<Contatto> l4 = contattoRepository.findByNomeIsNullAndCognomeIsNotNull();
-        l4.stream().forEach(t-> System.out.println(t));
+        l4.stream().forEach(t -> System.out.println(t));
         List<Contatto> l5 = contattoRepository.findByTelefonoIsNullOrderByNomeAsc();
-        l5.stream().forEach(t-> System.out.println(t));
+        l5.stream().forEach(t -> System.out.println(t));
         List<Contatto> l6 = contattoRepository.findByOrderByNomeAscCognomeDesc();
-        l6.stream().forEach(t-> System.out.println(t));
+        l6.stream().forEach(t -> System.out.println(t));
     }
-    
-    
 
 }

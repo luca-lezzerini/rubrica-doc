@@ -9,12 +9,19 @@ import org.springframework.stereotype.Repository;
 public interface ContattoRepository extends JpaRepository<Contatto, Long> {
 
     List<Contatto> findByNomeLikeOrderByNomeDesc(String nn);
-    
+
     List<Contatto> findByNomeAndCognome(String n, String c);
+
     List<Contatto> findByNomeOrCognome(String n, String c);
+
     List<Contatto> findByNomeIsNotNullAndCognome(String c);
+
     List<Contatto> findByNomeIsNullAndCognomeIsNotNull();
+
     List<Contatto> findByTelefonoIsNullOrderByNomeAsc();
+
     List<Contatto> findByOrderByNomeAscCognomeDesc();
-    
+
+    List<Contatto> findByNomeLikeOrCognomeLikeOrTelefonoLike(String n, String c, String t);
+
 }

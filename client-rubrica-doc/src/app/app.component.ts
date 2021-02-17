@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contatto } from './contatto';
+import { RicercaDto } from './ricerca-dto';
 import { RichiestaAServerDto } from './richiesta-a-server-dto';
 import { RispostaDaServerDto } from './risposta-da-server-dto';
 
@@ -73,9 +74,8 @@ export class AppComponent {
 
   cerca() {
     // metto il contatto da cancellare nel DTO
-    let req = new RichiestaAServerDto();
-    req.contatto = new Contatto();
-    req.contatto.nome = this.criterioRicerca;
+    let req = new RicercaDto();
+    req.stringaDaCercare = this.criterioRicerca;
 
     // preparo la richiesta POST verso il server
     let ox: Observable<RispostaDaServerDto> = this.http
